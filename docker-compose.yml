@@ -1,0 +1,26 @@
+version: '3.4'
+
+
+services:
+  adminer:
+    build:
+        context: ./Dockerfiles
+        dockerfile: adminer.dockerfile
+    ports:
+      - "8080:8080"
+
+  postgres:
+    build:
+      context: ./Dockerfiles
+      dockerfile: postgres.dockerfile
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ChangeMe}
+      POSTGRES_DB: ${POSTGRES_DB:-projet}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  
+volumes:
+  postgres_data:
