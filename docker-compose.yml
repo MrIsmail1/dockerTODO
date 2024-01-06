@@ -6,8 +6,17 @@ services:
     build:
         context: ./Dockerfiles
         dockerfile: adminer.dockerfile
+    container_name: adminer
     ports:
       - "8080:8080"
+  
+  composer:
+    build:
+      context: ./Dockerfiles
+      dockerfile: composer.dockerfile
+    container_name: composer
+    volumes:
+      - composer_data:/var/lib/composer
 
   postgres:
     build:
@@ -24,3 +33,4 @@ services:
   
 volumes:
   postgres_data:
+  composer_data:
